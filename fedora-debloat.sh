@@ -1,65 +1,40 @@
 #!/bin/bash
 
 # configure dnf
-print "%s" "
-maxparalell_downloads=10
-countme=false
+printf "%s" "
 fastestmirror=1
+max_parallel_downloads=10
+countme=false
 " | sudo tee -a /etc/dnf/dnf.conf
 
-# setup RPMFusion
-sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-"$(rpm -E %fedora)".noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"$(rpm -E %fedora)".noarch.rpm
-sudo dnf groupupdate core -y
-
-# make system fully-update
-sudo dnf upgrade -y
-
 # debloat
-fedora_debloat () {
-	log "fedora_debloat"
-	local -a fedora__debloat_stuff
-	fedora_debloat_stuff=(
-	"abrt*"
-	"anaconda*"
-	"avahi"
-	"baobab"
-	"bluez-cups"
-	"boost-date-time"
-	"cheese"
-	"fedora-bookmarks"
-	"fedora-chromium-config"
-	"geolite2*"
-	"gnome-calculator"
-	"gnome-calendar"
-	"gnome-clocks"
-	"gnome-contacts"
-	"gnome-logs"
-	"gnome-maps"
-	"gnome-remote-desktop"
-	"gnome-system-monitor"
-	"gnome-tour"
-	"gnome-weather"
-	"hyperv*"
-	"kpartx"
-	"mailcap"
-	"mtr"
-	"nano"
-	"simple-scan"
-	"sos"
-	)
-sudo dnf -y rm ${fedora_debloat_stuff[*]}
-}
-fedora_debloat
+sudo dnf remove -y abrt* anaconda* avahi baobab bluez-cups boost-date-time cheese fedora-bookmarks fedora-chromium-config geolite2* gnome-calculator gnome-calendar gnome-clocks gnome-contacts gnome-logs gnome-maps gnome-remote-desktop gnome-system-monitor gnome-tour gnome-weather hyperv* kpartx mailcap mtr nano simple-scan sos firefox
 
-# run update
+# run updates
 sudo dnf autoremove -y
 sudo fwupdmgr get-devices
 sudo fwupdmgr refresh --fore
 sudo fwupdmgr get-updates -y
 sudo fwupdmgr update -y
 
-# install RPMs
-sudo dnf install -y torbrowser-launcher mullvad-vpn --best --allowerasing keepassxc
+# setup RPMFusion
+sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-"$(rpm -E %fedora)".noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"$(rpm -E %fedora)".noarch.rpm
+sudo dnf groupupdate core -y
+
+# add RPMs to dnf
+	## Mullvad-vpn GUI
+sudo dnf config-manager --add-repo https://repository.mullvad.net/rpm/stable/mullvad.repo
+	## veracrypt GUI
+wget https://launchpad.net/veracrypt/trunk/1.26.7/+download/veracrypt-1.26.7-CentOS-8-x86_64.rpm
+
+# install apps
+sudo dnf install mullvad-vpn
+sudo dnf install veracrypt
+sudo dnf install keepassxc
+wget https://telegram.org/dl/desktop/linux
+
+# make system fully-update
+sudo dnf upgrade -y
 
 # NTS instead of NTP
 sudo sudo curl https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/chrony.conf -o /etc/chrony.conf
@@ -79,4 +54,6 @@ EOF
 
 sudo systemctl restart NetworkManager
 sudo hosnamectl hostname "localhost"
+
+# finish progresses
 echo "The configuration is now complete :)"
