@@ -8,7 +8,7 @@ countme=false
 " | sudo tee -a /etc/dnf/dnf.conf
 
 # debloat
-sudo dnf remove -y abrt* anaconda* avahi baobab bluez-cups boost-date-time cheese fedora-bookmarks fedora-chromium-config geolite2* gnome-calculator gnome-calendar gnome-clocks gnome-contacts gnome-logs gnome-maps gnome-remote-desktop gnome-system-monitor gnome-tour gnome-weather hyperv* kpartx mailcap mtr nano simple-scan sos firefox
+sudo dnf remove -y abrt* anaconda* libreoffice avahi baobab bluez-cups boost-date-time cheese fedora-bookmarks fedora-chromium-config geolite2* gnome-calculator gnome-calendar gnome-clocks gnome-online-accounts gnome-contacts gnome-logs gnome-maps gnome-remote-desktop gnome-system-monitor gnome-tour gnome-weather hyperv* kpartx mailcap mtr nano simple-scan sos firefox
 
 # run updates
 sudo dnf autoremove -y
@@ -28,9 +28,9 @@ sudo dnf config-manager --add-repo https://repository.mullvad.net/rpm/stable/mul
 wget https://launchpad.net/veracrypt/trunk/1.26.7/+download/veracrypt-1.26.7-CentOS-8-x86_64.rpm
 
 # install apps
-sudo dnf install mullvad-vpn
-sudo dnf install veracrypt
-sudo dnf install keepassxc
+sudo dnf install -y mullvad-vpn
+sudo dnf install -y veracrypt
+sudo dnf install -y keepassxc
 wget https://telegram.org/dl/desktop/linux
 
 # make system fully-update
