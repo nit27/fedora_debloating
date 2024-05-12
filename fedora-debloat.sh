@@ -56,4 +56,4 @@ sudo systemctl restart NetworkManager
 sudo hosnamectl hostname "localhost"
 
 # finish progresses
-echo "The configuration is now complete :)"
+echo "The configuration is now completed :)"
