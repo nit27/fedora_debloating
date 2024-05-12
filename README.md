@@ -1,2 +1,3 @@
-# fedora_cinamon_debloating
-debloat Fedora Cinamon with bash script
+# Debloat Fedora
+A bash script for debloating Fedora Workstation with Gnome Desktop & Cinamon Desktop
+### Note: this script is experimental and has no warranty!
