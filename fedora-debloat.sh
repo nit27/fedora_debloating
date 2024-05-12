@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # configure dnf
-fastestmirror=1
 print "%s" "
 maxparalell_downloads=10
 countme=false
+fastestmirror=1
 " | sudo tee -a /etc/dnf/dnf.conf
 
 # setup RPMFusion
@@ -15,10 +15,10 @@ sudo dnf groupupdate core -y
 sudo dnf upgrade -y
 
 # debloat
-fedora_cinamon_debloat () {
-	log "fedora_cinamon_debloat"
-	local -a fedora_cinamon_debloat_stuff
-	fedora_cinamon_debloat_stuff=(
+fedora_debloat () {
+	log "fedora_debloat"
+	local -a fedora__debloat_stuff
+	fedora_debloat_stuff=(
 	"abrt*"
 	"anaconda*"
 	"avahi"
@@ -47,9 +47,9 @@ fedora_cinamon_debloat () {
 	"simple-scan"
 	"sos"
 	)
-sudo dnf -y rm ${fedora_cinamon_debloat_stuff[*]}
+sudo dnf -y rm ${fedora_debloat_stuff[*]}
 }
-fedora_cinamon_debloat
+fedora_debloat
 
 # run update
 sudo dnf autoremove -y
@@ -79,6 +79,4 @@ EOF
 
 sudo systemctl restart NetworkManager
 sudo hosnamectl hostname "localhost"
-
 echo "The configuration is now complete :)"
-
