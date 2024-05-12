@@ -37,7 +37,7 @@ wget https://telegram.org/dl/desktop/linux
 sudo dnf upgrade -y
 
 # NTS instead of NTP
-sudo sudo curl https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/chrony.conf -o /etc/chrony.conf
+sudo curl https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/chrony.conf -o /etc/chrony.conf
 
 # randomize MAC address & disable static hostname
 sudo bash -c 'cat > /etc/NetworkManager/conf.d/00-macrandomize.conf' <<-'EOF'
