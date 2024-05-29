@@ -8,7 +8,41 @@ countme=false
 " | sudo tee -a /etc/dnf/dnf.conf
 
 # debloat
-sudo dnf remove -y abrt* anaconda* libreoffice avahi baobab bluez-cups boost-date-time cheese fedora-bookmarks fedora-chromium-config geolite2* gnome-calculator gnome-calendar gnome-clocks gnome-online-accounts gnome-contacts gnome-logs gnome-maps gnome-remote-desktop gnome-system-monitor gnome-tour gnome-weather hyperv* kpartx mailcap mtr nano simple-scan sos firefox
+sudo dnf remove -y abrt* \
+		anaconda* \
+  		libreoffice \
+      		baobab \
+		bluez-cups \
+  		boost-date-time \
+    		cheese \
+      		fedora-bookmarks \
+		fedora-chromium-config \
+  		geolite2* \
+    		gnome-calculator \
+      		gnome-characters \
+		gnome-classic-session \
+      		gnome-calendar \
+		gnome-clocks \
+  		gnome-online-accounts \
+    		gnome-contacts \
+      		gnome-logs \
+		gnome-maps \
+  		gnome-remote-desktop \
+  		gnome-system-monitor \
+    		gnome-tour \
+      		gnome-remote-desktop \
+		gnome-system-monitor \
+		gnome-user-docs \
+		yelp \
+      		gnome-weather \
+		hyperv* \
+  		kpartx \
+    		mailcap	\
+      		mtr \
+		nano \
+  		simple-scan \
+    		sos \
+      		firefox
 
 # run updates
 sudo dnf autoremove -y
@@ -53,7 +87,7 @@ ethernet.cloned-mac-address=random
 EOF
 
 sudo systemctl restart NetworkManager
-sudo hosnamectl hostname "localhost"
+sudo hostnamectl hostname "localhost"
 
 # finish progresses
 echo "The configuration is now completed :)"
