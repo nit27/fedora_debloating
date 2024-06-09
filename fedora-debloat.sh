@@ -30,11 +30,9 @@ sudo dnf remove -y abrt* \
   		gnome-remote-desktop \
   		gnome-system-monitor \
     		gnome-tour \
-      		gnome-remote-desktop \
-		gnome-system-monitor \
 		gnome-user-docs \
-		yelp \
       		gnome-weather \
+		yelp \
 		hyperv* \
   		kpartx \
     		mailcap	\
@@ -42,7 +40,7 @@ sudo dnf remove -y abrt* \
 		nano \
   		simple-scan \
     		sos \
-      		firefox
+      		firefox ## default firefox on Fedora is bs, self install & customise firefox when the script is done!
 
 # run updates
 sudo dnf autoremove -y
@@ -70,7 +68,7 @@ wget https://telegram.org/dl/desktop/linux
 # make system fully-update
 sudo dnf upgrade -y
 
-# NTS instead of NTP
+# use NTS rather than NTP
 sudo curl https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/chrony.conf -o /etc/chrony.conf
 
 # randomize MAC address & disable static hostname
